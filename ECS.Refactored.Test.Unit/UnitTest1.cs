@@ -37,7 +37,7 @@ namespace ECS.Refactored.Test.Unit
         public void TempSensor_GetTemp_is5()
         {
             _fake.temperature = 5;
-            Assert.That(_uut.GetCurTemp(), Is.EqualTo(5));
+            Assert.That(_uut.GetCurTemp(), Is.EqualTo(5));//test
         }
     }
 }
