@@ -6,10 +6,10 @@
         private readonly ITempSensor _tempSensor;
         private readonly IHeater _heater;
 
-        public ECS(int thr)
+        public ECS(int thr, ITempSensor sensor)
         {
             SetThreshold(thr);
-            _tempSensor = new TempSensor();
+            _tempSensor = sensor;   // vi bruger constructor injection for at kunne teste
             _heater = new Heater();
         }
 
