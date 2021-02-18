@@ -1,6 +1,8 @@
-﻿namespace ECS.Legacy
+﻿using ECS.Refactored;
+
+namespace ECS.Refactored
 {
-    public class Heater
+    public class Heater : IHeater
     {
         public void TurnOn()
         {
