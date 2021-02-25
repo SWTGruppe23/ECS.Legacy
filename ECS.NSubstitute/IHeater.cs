@@ -1,6 +1,6 @@
 ﻿namespace ECS.NSubstitute
 {
-    interface IHeater
+    public interface IHeater
     {
         public void TurnOn();
         public void TurnOff();

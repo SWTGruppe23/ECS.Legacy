@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using ECS.NSubstitute;
+using NSubstitute;
 
 namespace ECS.NSubstitute.Test.Unit
 {
@@ -24,19 +25,28 @@ namespace ECS.NSubstitute.Test.Unit
     public class Tests
     {
         private ECS _uut;
-        private FakeTempSensor _fake = new FakeTempSensor();
+        private IHeater _fakeHeater = Substitute.For<IHeater>();
+        private ITempSensor _fakesSensor = Substitute.For<ITempSensor>();
         [SetUp]
         public void Setup()
         {
             int threshold = 32;
-            _uut = new ECS(threshold, _fake);
+            _uut = new ECS(threshold, _fakesSensor, _fakeHeater);
         }
 
         [Test]
         public void TempSensor_GetTemp_is5()
         {
-            _fake.temperature = 5;
+            _fakesSensor.GetTemp().Returns(5);
             Assert.That(_uut.GetCurTemp(), Is.EqualTo(5));//test
+        }
+
+        [Test]
+        public void TempSensor_GetTemp_isCalled()
+        {
+            _fakesSensor.ClearReceivedCalls();
+            _uut.GetCurTemp();
+            _fakesSensor.Received(1).GetTemp();
         }
     }
 }
